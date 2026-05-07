@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المهام | TaskFlow Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============ شريط الأدوات العلوي ============ -->
+    <div class="toolbar-top">
+        <button class="tool-btn" onclick="toggleDark()" id="darkModeBtn" title="الوضع الليلي">
+            🌙 <span>ليلي</span>
+        </button>
+        <button class="tool-btn" onclick="shareApp()" title="شارك التطبيق">
+            ⭐ <span>شارك</span>
+        </button>
+        <button class="tool-btn premium-btn" onclick="showPremium()" title="نسخة احترافية">
+            💎 <span>بريميوم</span>
+        </button>
+    </div>
+
+    <!-- ============ الحاوية الرئيسية ============ -->
+    <div class="app-container">
+        <!-- الرأس -->
+        <header class="app-header">
+            <span class="logo-icon">✅</span>
+            <h1>TaskFlow Pro</h1>
+            <p class="subtitle" id="motivationMsg">نظام إدارة المهام الذكي</p>
+        </header>
+
+        <!-- إحصائيات سريعة -->
+        <div class="stats-row" id="statsRow">
+            <div class="stat-card">
+                <div class="stat-num" id="statTotal">0</div>
+                <div class="stat-label">إجمالي المهام</div>
+            </div>
+            <div class="stat-card done">
+                <div class="stat-num" id="statDone">0</div>
+                <div class="stat-label">مكتملة</div>
+            </div>
+            <div class="stat-card urgent">
+                <div class="stat-num" id="statUrgent">0</div>
+                <div class="stat-label">عالية الأولوية</div>
+            </div>
+        </div>
+
+        <!-- شريط التقدم ونقاط الخبرة -->
+        <div class="xp-bar-container">
+            <div class="xp-info">
+                <span>🏆 المستوى <strong id="userLevel">1</strong></span>
+                <span>⭐ <strong id="userXP">0</strong> / <span id="xpNeeded">10</span> XP</span>
+            </div>
+            <div class="xp-bar">
+                <div class="xp-fill" id="xpFill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <!-- نموذج إضافة / تعديل مهمة -->
+        <form class="task-form" id="taskForm" autocomplete="off">
+            <input type="hidden" id="editId" value="">
+            <input type="text" id="taskTitle" placeholder="عنوان المهمة..." maxlength="120" required>
+            <div class="form-row">
+                <input type="date" id="taskDueDate">
+                <select id="taskPriority">
+                    <option value="low">🟢 منخفضة</option>
+                    <option value="medium" selected>🟡 متوسطة</option>
+                    <option value="high">🔴 عالية</option>
+                </select>
+                <button type="submit" class="btn btn-add" id="submitBtn">➕ إضافة مهمة</button>
+            </div>
+        </form>
+
+        <!-- شريط البحث والتصفية -->
+        <div class="filter-bar">
+            <div class="search-wrap">
+                <input type="text" id="searchInput" placeholder="🔍 بحث عن مهمة...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="filter-chips">
+                <button class="chip active" data-filter="all">الكل</button>
+                <button class="chip" data-filter="active">النشطة</button>
+                <button class="chip" data-filter="completed">المكتملة</button>
+                <button class="chip" data-filter="high">🔴 عالية</button>
+            </div>
+        </div>
+
+        <!-- قائمة المهام -->
+        <ul class="task-list" id="taskList">
+            <!-- تُملأ ديناميكيًا عبر JavaScript -->
+        </ul>
+
+        <!-- رسالة تذكير بالمهام -->
+        <div class="reminder-banner" id="reminderBanner" style="display:none;">
+            🔔 <span id="reminderText"></span>
+        </div>
+    </div>
+
+    <!-- حاوية إشعارات التوست -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal Premium -->
+    <div class="modal-overlay" id="premiumModal" style="display:none;">
+        <div class="modal-box">
+            <h2>💎 النسخة الاحترافية</h2>
+            <p>🚀 قريبًا: إشعارات ذكية + مزامنة سحابية + ثيمات متقدمة + دعم فني!</p>
+            <ul>
+                <li>🔔 إشعارات ذكية للتذكير</li>
+                <li>☁️ مزامنة عبر الأجهزة</li>
+                <li>🎨 ثيمات وألوان مخصصة</li>
+                <li>📊 إحصائيات متقدمة</li>
+                <li>👥 مشاركة المهام مع فريق</li>
+            </ul>
+            <button class="btn btn-add" onclick="closePremium()">حسنًا، متحمس! 🔥</button>
+            <button class="btn btn-close" onclick="closePremium()">إغلاق</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
